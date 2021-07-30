@@ -41,7 +41,7 @@ export const messageResolvers ={
             }
 
             try {
-                // register message [ falta autenticacion ]
+                // register message
                 const message = await prisma.createMessage({
                     text,
                     user:{
@@ -61,7 +61,7 @@ export const messageResolvers ={
             }
 
             try {
-                // register message [ falta autenticacion ]
+                // register message updateMessage
                 const message = await prisma.updateMessage({
                     data:{ text },
                     where:{ id }
