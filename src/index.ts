@@ -1,19 +1,12 @@
-import { prisma } from './generated/prisma-client'
+import {ApolloServer} from 'apollo-server'
+import { userResolvers } from './resolvers/user';
+import { userSchema } from './schemas/user';
 
-// A `main` function so that we can use async/await
-async function main() {
-  // Create a new user called `Alice`
-  const newUser = await prisma.createUser({ 
-      name: 'Daniel',
-      email: 'daniel21cnt@gmail.com',
-      password: '123456' 
-    })
-    
-  console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`)
+const server = new ApolloServer({
+    resolvers: {...userResolvers},
+    typeDefs: [userSchema]
+})
 
-  // Read all users from the database and print them to the console
-  const allUsers = await prisma.users()
-  console.log(allUsers)
-}
-
-main().catch(e => console.error(e))
+server.listen().then(({url})=>{
+    console.log(`Server listening on ${ url }`);
+})

@@ -1,7 +1,8 @@
 type User {
   id: ID! @id
-  email: String @unique
+  email: String! @unique
   name: String!
+  password: String!
   messages: [Message!]!
 }
 
