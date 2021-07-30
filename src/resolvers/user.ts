@@ -4,8 +4,6 @@ export const userResolvers ={
     Query:{
         getUser: async(_,{ id })=>{
             try {
-                console.log( '=============<',id );
-                
                 const user = await prisma.user({ id })
                 return user
             } catch (error) {

@@ -1,10 +1,13 @@
 import {ApolloServer} from 'apollo-server'
-import { userResolvers } from './resolvers/user';
-import { userSchema } from './schemas/user';
+import { resolvers } from './resolvers'
+import { typeDefs } from './schemas/index';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const server = new ApolloServer({
-    resolvers: {...userResolvers},
-    typeDefs: [userSchema]
+    resolvers,
+    typeDefs
 })
 
 server.listen().then(({url})=>{

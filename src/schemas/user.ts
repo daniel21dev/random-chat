@@ -12,13 +12,5 @@ export const userSchema = gql`
         email: String!
         password: String!
     }
-
-    type Query{
-        getUser( id: ID ): User
-    }
-
-    type Mutation{
-        createUser( input: UserInput ): User
-    }
 `;
 
