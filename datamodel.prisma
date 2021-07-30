@@ -1,0 +1,13 @@
+type User {
+  id: ID! @id
+  email: String @unique
+  name: String!
+  messages: [Message!]!
+}
+
+type Message{
+  id: ID! @id
+  text: String!
+  createdAt: DateTime! @createdAt
+  user: User @relation(link: INLINE)
+}
