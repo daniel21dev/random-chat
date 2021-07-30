@@ -8,7 +8,6 @@ export const messageSchema = gql`
     }
 
     input MessageInput{
-        user: ID!
         text: String!
     }
 `;

@@ -8,12 +8,14 @@ const QueryDefs = gql`
         getUser( id: ID ): User
         #Message
         getRandomMessage: Message
+        getUserMessages: [Message]
     }
 `
 const MutationDefs = gql`
     type Mutation{
         #User
         createUser( input: UserInput! ): User
+        loginUser( input: LoginInput! ): String
 
         #Message 
         createMessage( input: MessageInput! ): Message

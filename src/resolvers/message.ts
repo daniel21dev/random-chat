@@ -18,17 +18,35 @@ export const messageResolvers ={
             } catch (error) {
                 console.log( error );
             }
+        },
+        getUserMessages: async(_,__, ctx ) =>{
+            // check if user is auhtenticated
+            if( !ctx.user ){
+                throw new Error('You must be authenticated')
+            }
+            // find and order the user messages
+            const messages = await prisma.user({ id: ctx.user.id })
+                .messages({
+                    orderBy: 'createdAt_DESC'
+                })
+
+            return messages
         }
     },
     Mutation:{
-        createMessage: async(_,{ input }) =>{
-            const {user, text} = input
+        createMessage: async(_,{ input }, ctx) =>{
+            const {text} = input
+            // check if user is auhtenticated
+            if( !ctx.user ){
+                throw new Error('You must be authenticated')
+            }
+
             try {
                 // register message [ falta autenticacion ]
                 const message = await prisma.createMessage({
                     text,
                     user:{
-                        connect: { id: user }
+                        connect: { id: ctx.user.id }
                     }
                 })
                 return message
