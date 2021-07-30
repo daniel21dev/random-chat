@@ -10,4 +10,9 @@ export const messageSchema = gql`
     input MessageInput{
         text: String!
     }
+
+    input UpdateMessageInput{
+        id: ID!
+        text: String!
+    }
 `;

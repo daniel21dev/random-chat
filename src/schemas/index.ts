@@ -19,6 +19,7 @@ const MutationDefs = gql`
 
         #Message 
         createMessage( input: MessageInput! ): Message
+        updateMessage( input: UpdateMessageInput! ): Message
     }
 `
 

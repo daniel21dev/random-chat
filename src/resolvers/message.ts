@@ -26,10 +26,9 @@ export const messageResolvers ={
             }
             // find and order the user messages
             const messages = await prisma.user({ id: ctx.user.id })
-                .messages({
-                    orderBy: 'createdAt_DESC'
-                })
-
+                                            .messages({
+                                                orderBy: 'createdAt_DESC'
+                                            })
             return messages
         }
     },
@@ -48,6 +47,24 @@ export const messageResolvers ={
                     user:{
                         connect: { id: ctx.user.id }
                     }
+                })
+                return message
+            } catch (error) {
+                console.log( error);
+            }
+        },
+        updateMessage: async(_,{ input }, ctx) =>{
+            const {text, id} = input
+            // check if user is auhtenticated
+            if( !ctx.user ){
+                throw new Error('You must be authenticated')
+            }
+
+            try {
+                // register message [ falta autenticacion ]
+                const message = await prisma.updateMessage({
+                    data:{ text },
+                    where:{ id }
                 })
                 return message
             } catch (error) {
