@@ -4,14 +4,8 @@ import { createJWT } from '../helpers/jwt';
 
 export const userResolvers ={
     Query:{
-        getUser: async(_,{ id })=>{
-            const user = await prisma.user({ id })
-
-            if( !user ){
-                throw new Error('The user does not exists')
-            }
-
-            return user
+        getUser: async(_,__, ctx )=>{
+            return ctx.user
         }
     },
     Mutation:{

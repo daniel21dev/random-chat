@@ -5,7 +5,7 @@ import { messageSchema } from './message';
 const QueryDefs = gql`
     type Query{
         #User
-        getUser( id: ID ): User
+        getUser: User
         #Message
         getRandomMessage: Message
         getUserMessages: [Message]

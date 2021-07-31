@@ -23,6 +23,10 @@ export const createJWT = ( id ) =>{
 export const validateJWT = async ( token: string | string[] ) =>{
     try {
         const { id } = jwt.verify( token, process.env.SECRETWORD );
+        if( !id ){
+            // trow error
+            throw new Error(`Invalid token`);
+        }
         const userAuth = prisma.user({ id })
 
         if( !userAuth ){
