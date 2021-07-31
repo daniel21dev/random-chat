@@ -27,7 +27,12 @@ export const userResolvers ={
             input.password = await bcrypt.hash( password,salt );
             // register user
             const user = await prisma.createUser( input );
-            return user
+            // genrate token 
+            const token = await createJWT( user.id )
+            return {
+                user,
+                token
+            }
         },
         loginUser: async(_,{ input })=>{
             const { password, email } = input 
@@ -41,7 +46,10 @@ export const userResolvers ={
             }
 
             const token = await createJWT( user.id )
-            return token 
+            return {
+                user,
+                token
+            } 
         }
     }
 }

@@ -14,8 +14,8 @@ const QueryDefs = gql`
 const MutationDefs = gql`
     type Mutation{
         #User
-        createUser( input: UserInput! ): User
-        loginUser( input: LoginInput! ): String
+        createUser( input: UserInput! ): AuthUser
+        loginUser( input: LoginInput! ): AuthUser
 
         #Message 
         createMessage( input: MessageInput! ): Message

@@ -7,6 +7,11 @@ export const userSchema = gql`
         email: String
     }
 
+    type AuthUser{
+        user: User
+        token: String
+    }
+
     input UserInput{
         name: String!
         email: String!
