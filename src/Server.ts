@@ -34,14 +34,16 @@ export class Server{
     }
 
     middlewares(){
+        // all middlewares here
         this.app.use( express.static( path.join( __dirname, '../public') ) )
     }
 
     start(){
+        // start apollo server
         this.apolloServer.listen().then(({url})=>{
             console.log(`Server listening on ${ url }`);
         })
-
+        // start express server
         this.app.listen( process.env.PORT,()=>{
             console.log(`Frontend app in ${ process.env.PORT }`);
         })

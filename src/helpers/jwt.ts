@@ -10,7 +10,6 @@ export const createJWT = ( id ) =>{
             expiresIn: '12h'
         }, ( err, token)=>{
             if( err ){
-                console.log( err);
                 reject('it could not generate jwt')
             }else{
                 resolve( token );

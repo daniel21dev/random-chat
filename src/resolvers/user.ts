@@ -5,6 +5,7 @@ import { createJWT } from '../helpers/jwt';
 export const userResolvers ={
     Query:{
         getUser: async(_,__, ctx )=>{
+            // return the user loggedin
             return ctx.user
         }
     },
@@ -30,15 +31,16 @@ export const userResolvers ={
         },
         loginUser: async(_,{ input })=>{
             const { password, email } = input 
+            // check if user exists
             const user = await prisma.user({ email })
             if( !user ){    
                 throw new Error(`User does not exists!`);
             }
-
+            // compare the input password with the DB password
             if( !bcrypt.compareSync( password, user.password ) ){
                 throw new Error(`Password incorrect`);
             }
-
+            // create token
             const token = await createJWT( user.id )
             return {
                 user,

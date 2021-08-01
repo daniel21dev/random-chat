@@ -2,6 +2,7 @@ import { gql } from 'apollo-server';
 import { userSchema } from './user';
 import { messageSchema } from './message';
 
+// here are declared al queries
 const QueryDefs = gql`
     type Query{
         #User
@@ -11,6 +12,7 @@ const QueryDefs = gql`
         getUserMessages: [Message]
     }
 `
+// here are declared al mutations
 const MutationDefs = gql`
     type Mutation{
         #User
@@ -22,7 +24,7 @@ const MutationDefs = gql`
         updateMessage( input: UpdateMessageInput! ): Message
     }
 `
-
+// here are exported all schemas
 export const typeDefs = [
     userSchema,
     messageSchema,
