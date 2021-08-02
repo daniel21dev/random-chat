@@ -12,8 +12,9 @@ export const userResolvers ={
     Mutation:{
         createUser: async(_,{ input }) =>{
             const { password, email } = input 
+            input.email = email.toLowerCase()
             // check if the email is already registered
-            const userExists = await prisma.user({ email })
+            const userExists = await prisma.user({ email: input.email })
             if( userExists ){
                 throw new Error(`The email ${ input.email } is already registered`);
             }
@@ -31,8 +32,9 @@ export const userResolvers ={
         },
         loginUser: async(_,{ input })=>{
             const { password, email } = input 
+            input.email = email.toLowerCase()
             // check if user exists
-            const user = await prisma.user({ email })
+            const user = await prisma.user({ email: input.email })
             if( !user ){    
                 throw new Error(`User does not exists!`);
             }
