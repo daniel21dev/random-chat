@@ -11,12 +11,17 @@ export const userResolvers ={
     },
     Mutation:{
         createUser: async(_,{ input }) =>{
-            const { password, email } = input 
+            const { password, email, name } = input 
             // check if is a valid email
-            if( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test( email ) ){
+            if( !( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test( email )) ){
                 throw new Error(`The email ${ input.email } is Invalid`);
             }
             input.email = email.toLowerCase()
+            input.name = name.trim()
+            // check name length
+            if( input.name.length < 6 || input.name.length > 255){
+                throw new Error(`The name must be 6-255 characteres`);
+            }
             // check if the email is already registered
             const userExists = await prisma.user({ email: input.email })
             if( userExists ){
