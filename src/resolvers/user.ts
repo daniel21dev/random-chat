@@ -12,6 +12,10 @@ export const userResolvers ={
     Mutation:{
         createUser: async(_,{ input }) =>{
             const { password, email } = input 
+            // check if is a valid email
+            if( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test( email ) ){
+                throw new Error(`The email ${ input.email } is Invalid`);
+            }
             input.email = email.toLowerCase()
             // check if the email is already registered
             const userExists = await prisma.user({ email: input.email })

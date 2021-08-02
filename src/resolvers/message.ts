@@ -30,10 +30,15 @@ export const messageResolvers ={
     },
     Mutation:{
         createMessage: async(_,{ input }, ctx) =>{
-            const {text} = input
             // check if user is auhtenticated
             if( !ctx.user ){
                 throw new Error('You must be authenticated')
+            }
+            
+            const text = input.text.trim()
+            // check length
+            if( text.length <1 || text.length > 255 ){
+                throw new Error('Text size invalid ( must be 1-255 characteres)')
             }
             // register message
             const message = await prisma.createMessage({
@@ -45,12 +50,17 @@ export const messageResolvers ={
             return message
         },
         updateMessage: async(_,{ input }, ctx) =>{
-            const {text, id} = input
             // check if user is auhtenticated
             if( !ctx.user ){
                 throw new Error('You must be authenticated')
             }
 
+            const text = input.text.trim()
+            const { id } = input
+            // check length
+            if( text.length <1 || text.length > 255 ){
+                throw new Error('Text size invalid ( must be 1-255 characteres)')
+            }
             // register message updateMessage
             const message = await prisma.updateMessage({
                 data:{ text },
