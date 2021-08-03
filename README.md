@@ -4,10 +4,10 @@ Random chat es una aplicación de servidor que expone una graphql api, donde los
 ### Instalación
 Para instalar y correr esta aplicación debes de tener docker y docker-compose ya instalados.
 
-1. Crear archvio .env
+1. Crear archvio .env,
     ejemplo del contenido que debe tener:
-        PORT=4001
-        SECRETWORD=TU_PALABRA_SECRETA
+		PORT=4001
+		SECRETWORD=TU_PALABRA_SECRETA
 2. Dentro del proyecto ejecutar "docker-compose build".
 3. ejecutar "docker-compose up".
 4. asegurarse que tanto prisma como mongo y random-chat_app ( imagen de esta app) esten ejecutandose correctamente.
