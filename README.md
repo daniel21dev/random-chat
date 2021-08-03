@@ -12,7 +12,7 @@ La app corre por default en el puerto 4000 ( se puede cambiar en src/Server.ts ,
 
 #Info
 
-Esta aplicación esta creada usando:
+Esta aplicación fue creada usando:
 - typescript como lenguaje de programación.
 - graphql como lenguaje de consultas ( graphql api ).
 - apollo como servidor de graphql.
