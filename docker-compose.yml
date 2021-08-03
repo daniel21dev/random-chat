@@ -4,6 +4,8 @@ services:
     container_name: randomchat
     restart: always
     build: .
+    depends_on: 
+      - prisma
     ports: 
       - "4001:4001"
       - "4000:4000"
